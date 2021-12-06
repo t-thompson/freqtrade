@@ -12,6 +12,7 @@ from math import ceil
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+import os
 import progressbar
 import rapidjson
 from colorama import Fore, Style
@@ -500,6 +501,8 @@ class Hyperopt:
                             self._save_result(val)
 
                             pbar.update(current)
+                            if os.environ.get('exit', 'Not Set') == 'exit':
+                                raise KeyboardInterrupt
 
         except KeyboardInterrupt:
             print('User interrupted..')
